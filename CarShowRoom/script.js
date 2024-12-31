@@ -19,7 +19,7 @@ function moveCarousel(direction) {
     const totalSlides = carousel.children.length;
     
     // Calculate visibleSlides based on screen width
-    const visibleSlides = window.innerWidth < 800 ? 1 : 3;
+    const visibleSlides = window.innerWidth < 800 ? 1 : 4;
 
     currentSlide += direction;
 

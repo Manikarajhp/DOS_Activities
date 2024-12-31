@@ -355,13 +355,19 @@ nav {
     .more-car {
         width: 230px;
     }
+    .wrapper .carousel .card .logo{
+      height: 50%;
+    }
     .service-cards{
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
         gap: 10px;
     }
+    .more-car{
+      width: 300px;
+    }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
     .home .black-shade p{
         animation: moveRight 3s ease;
     }
@@ -369,19 +375,19 @@ nav {
         animation: moveLeft 3s ease;
     }
     .wrapper .carousel {
-      grid-auto-columns: 100%;
-    }
-    .wrapper .carousel .card{
-      height: 500px;
+      grid-auto-columns: 50%;
     }
     .wrapper i:last-child {
-        right: -8px;
+        right: -25px;
+    }
+    .wrapper .carousel .card{
+      height: 400px;
     }
     .more-cars{
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
     }
     .more-car{
-        width: 185px;
+        width: 205px;
         height: 250px;
     }
     .more-car .detail h3{
@@ -396,7 +402,7 @@ nav {
     }
     .service-cards{
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
         gap: 10px;
     }
     .service-card{
@@ -411,7 +417,10 @@ nav {
         margin-top: 30px;
     }
 }
-@media screen and (max-width:425px) {
+@media screen and (max-width:426px) {
+  .wrapper .carousel {
+    grid-auto-columns: 100%;
+  }
   .wrapper .carousel .card .logo{
     height: 50%;
   }
