@@ -1,0 +1,465 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Poppins", serif;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background: #011b78;
+    color: white;
+    padding: 0 20px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.logo {
+    font-size: 1.5rem;
+}
+.logo span{
+    font-size: 0.7rem;
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+.nav-links li {
+    padding: 0 20px;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+.burger {
+    display: none;
+    cursor: pointer;
+}
+.burger div {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background: #011b76;
+    }
+    .nav-links li {
+        text-align: center;
+        padding: 20px 0;
+        width: 100%;
+    }
+    .burger {
+        display: block;
+    }
+}
+.nav-active {
+    display: flex;
+}
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+/* ____________________________________________________________________________________________________________________________ */
+.home{
+  background-image: url('images/car1.jpg') ;
+  background-size: cover;
+}
+.home .black-shade{
+  height: 100vh;
+  padding: 10px;
+  background-color: rgba(22, 21, 21,0.7);
+  color: white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.home .black-shade h1{
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.home .black-shade p, .home .black-shade h1{
+  animation: fade 3s ease;
+}
+.home .black-shade span{
+  color: yellowgreen;
+}
+/* ________________________________________________________________________________________________________________________________ */
+.new-cars, .top-cars, .services ,.contact-blend{
+    padding: 50px 10px;
+    background-color: #f9f9f9;
+    margin: 20px 0;
+    position: relative;
+}
+.top-cars h2, p{
+    margin-left: 10px;
+}
+.wrapper {
+    margin-top: 20px;
+    width: 90%;
+    position: relative;
+}
+.wrapper i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.23rem;
+  height: 50px;
+  width: 50px;
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 50px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+.wrapper i:first-child {
+  left: -22px;
+}
+.wrapper i:last-child {
+  right: -22px;
+}
+.wrapper i:active {
+  transform: translateY(-50%) scale(0.85);
+}
+.wrapper .carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% / 3) - 12px);
+  gap: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.wrapper .carousel.no-transition {
+  scroll-behavior: auto;
+}
+.wrapper .carousel::-webkit-scrollbar {
+  display: none;
+}
+.wrapper .carousel.dragging {
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+}
+.wrapper .carousel .card {
+  scroll-snap-align: start;
+  height: 500px;
+  background: rgb(239, 232, 219);
+  border-radius: 8px;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+.wrapper .carousel .card .logo{
+  width: 100%;
+  height: 60%;
+}
+.wrapper .carousel .card .logo img{
+  width: 100%;
+  height: 100%;
+}
+.wrapper .carousel.dragging .card {
+  user-select: none;
+  cursor: grab;
+}
+.wrapper .carousel .card .detail{
+  margin: 10px;
+}
+.wrapper .carousel .card .detail button{
+  width: 100%;
+  height: 40%;
+  border-radius: 10px;
+  background-color: navy;
+  color: white;
+  margin-top: 10px;
+  font-size: large;
+}
+.wrapper .carousel .card h3{
+  font-size: 1.42rem;
+  font-weight: 5000;
+}
+.wrapper .carousel .card p{
+  color: #6a6d78;
+  margin-top: 5px;
+  font-size: 1.21rem;
+}
+/* ___________________________________________________________________________________________________________________________ */  
+.more-car{
+  width: 250px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(231, 231, 240);
+  box-shadow: 1px 1px 5px 1px gray;
+  transition: 0.5s;
+}
+.more-car:hover{
+  transform: scale(1.05);
+}
+.more-car .logo, .service-card-img{
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.more-cars{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  gap: 20px;
+}
+.more-car .detail{
+  margin: 10px;
+}
+.more-car p{
+  font-size: 14px;
+  color: rgb(61, 55, 55);
+}
+.more-car button{
+  width: 100%;
+  border: none;
+  margin-top: 10px;
+  background: transparent;
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+/* ____________________________________________________________________________________________________________________________ */
+.service-cards{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.service-card{
+  width: 300px;
+  height: 400px;
+  background-color: rgb(206, 206, 247);
+  border-radius: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.service-card:hover{
+  background-color: #011b76;
+  color: white;
+}
+.service-card-img{
+  width: 100%;
+  height: 40%;
+}
+
+.service-card-img{
+  height: 40%;
+}
+.service-card-img img{
+  width: 64px;
+  height: 64px;
+}
+.more-car .logo img{
+  width: 80%;
+  height: 80%;
+}
+.service-card-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.service-card-text p{
+  margin-top: 10px;
+  text-align: center;
+}
+.services marquee{
+  padding: 10px;
+}
+.services marquee img{
+  margin: 0px 50px;
+}
+/* __________________________________________________________________________________________________________________________________________________________ */
+.contact iframe {
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+.contact .info {
+  margin-top: 20px;
+}
+.contact{
+  background-image: url('images/car2.jpg');
+  background-size: cover;
+}
+.contact-blend{
+  width: 100%;
+  margin-bottom: 0px;
+  color: white;
+  padding-top: 60px;
+  background-color: rgba(0, 0, 0,0.7);
+}
+.contact-blend h2{
+  margin-bottom: 10px;
+}
+.contact-blend ul li{
+  margin: 5px;
+  list-style: none;
+}
+.contact-blend ul a{
+  text-decoration: none;
+  color: white;
+}
+.contact-blend ul a:hover{
+  color: whitesmoke;
+}        
+.contact-pages ul {
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.contact-pages li {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1204px) {
+    .top-cars .card {
+        width: 100%;
+    }
+    .more-cars{
+        grid-template-columns: auto auto auto;
+    }
+    .more-car {
+        width: 230px;
+    }
+    .service-cards{
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .home .black-shade p{
+        animation: moveRight 3s ease;
+    }
+    .home .black-shade h1{
+        animation: moveLeft 3s ease;
+    }
+    .wrapper .carousel {
+      grid-auto-columns: 100%;
+    }
+    .wrapper .carousel .card{
+      height: 500px;
+    }
+    .wrapper i:last-child {
+        right: -8px;
+    }
+    .more-cars{
+        grid-template-columns: auto auto;
+    }
+    .more-car{
+        width: 185px;
+        height: 250px;
+    }
+    .more-car .detail h3{
+        font-size: 16px;
+    }
+    .more-car .detail p{
+        font-size: 12px;
+    }
+    .more-car .detail button{
+        font-size: 12px;
+        margin-top: -8px;
+    }
+    .service-cards{
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px;
+    }
+    .service-card{
+        width:200px;
+        height: 250px;
+    }
+    .service-card-text{
+        font-size: 12px;
+        margin: 15px;
+    }
+    .services marquee{
+        margin-top: 30px;
+    }
+}
+@media screen and (max-width:425px) {
+  .wrapper .carousel .card .logo{
+    height: 50%;
+  }
+  .wrapper .carousel .card{
+    height: 400px;
+  }
+  .more-cars,.service-cards{
+    display: flex;
+    flex-direction: column;
+  }
+  .more-car, .service-card{
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  .more-car .logo, .service-card-img{
+    width: 60%;
+    height: 100%;
+  }
+  .more-car .logo img, .service-card-img img{
+     margin-top: 20px;
+  }
+}
+@keyframes fade {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}  
+@keyframes moveRight {
+  0%{
+    opacity: 0;
+    transform: translateX(-400px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+@keyframes moveLeft {
+  0%{
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
