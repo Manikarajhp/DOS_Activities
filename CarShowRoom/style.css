@@ -11,7 +11,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 50px;
-    background: #011b78;
+    background: #00308F;
     color: white;
     padding: 0 20px;
     width: 100%;
@@ -208,6 +208,9 @@ nav {
   margin-top: 5px;
   font-size: 1.21rem;
 }
+.wrapper .carousel .card button:hover{
+  background-color: #007FFF;
+}
 /* ___________________________________________________________________________________________________________________________ */  
 .more-car{
   width: 250px;
@@ -265,7 +268,7 @@ nav {
   cursor: pointer;
 }
 .service-card:hover{
-  background-color: #011b76;
+  background-color: #007FFF;
   color: white;
 }
 .service-card-img{

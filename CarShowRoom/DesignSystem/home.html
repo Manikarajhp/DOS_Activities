@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: whitesmoke;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 30px;
+        }
+        table td{
+            padding: 10px;
+        }
+        table th{
+            font-size: xx-large;
+            font-weight: bold;
+            text-align: left;
+        }
+        .container{
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgb(241, 233, 235);
+        }
+        .bar{
+            margin: 5px;
+        }
+        .bar ul{
+            display: flex;
+        }
+        .bar ul li{
+            list-style: none;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 5px;
+            transition: 0.5s;
+        }
+        li:hover{
+            transform: scale(1.1);
+        }
+/* _________________________________________________________________ */
+        button{
+            width: 150px;
+            height: 40px;
+            transition: 0.5s;
+            font-size: large;
+            font-weight: bold;
+        }
+        .create-btn-bgcolor,
+        .create-btn-boxshadow,
+        .create-btn-border,
+        .create-btn-icon,
+        .create-btn-round,
+        .danger-btn-bgcolor,
+        .danger-btn-boxshadow,
+        .danger-btn-border,
+        .danger-btn-icon,
+        .danger-btn-round,
+        .more-btn-bgcolor,
+        .more-btn-boxshadow,
+        .more-btn-border,
+        .more-btn-round,
+        .more-btn-icon
+        {
+            background-color: rgb(46, 247, 46);
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        .danger-btn-bgcolor,
+        .danger-btn-boxshadow,
+        .danger-btn-round,
+        .danger-btn-border,
+        .danger-btn-icon{
+            background-color: rgb(238, 49, 49);
+            color: white;
+        }
+        
+        .more-btn-bgcolor,
+        .more-btn-boxshadow,
+        .more-btn-round,
+        .more-btn-icon,
+        .more-btn-border
+        {
+            background-color: rgb(13, 13, 180);
+            color: white;
+        }
+        .create-btn-border{
+            border: 1px solid rgb(46, 247, 46);
+            color: rgb(46, 247, 46);
+            background-color: transparent;
+        }
+        .danger-btn-border{
+            border: 1px solid rgb(238, 49, 49);
+            color: rgb(238, 49, 49);
+            background-color: transparent;
+        }
+        .more-btn-border{
+            border: 1px solid rgb(13, 13, 180);
+            color:  rgb(13, 13, 180);
+            background-color: transparent;
+        }
+        .create-btn-boxshadow,.danger-btn-boxshadow, .more-btn-boxshadow{
+            box-shadow: 1px 1px 1px 2px black;
+        }
+        .create-btn-round,
+        .danger-btn-round,
+        .more-btn-round{
+            border-radius: 50px;
+        }
+        #icon{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0.5px 0.5px 1px 1px rgb(0, 0, 0);
+        }
+
+        .secondary-btn{
+            background-color: rgb(63, 59, 59);
+            color: white;
+            border-radius: 1px;
+            border: none;
+        }
+        .text-btn{
+            background-color: transparent;
+            border: none;
+            color: rgb(13, 13, 180);
+        }
+        .dim-btn{
+            background-color: rgb(228, 210, 215);
+            color: rgb(149, 131, 136);
+            border: none;
+        }
+        .gradient-btn{
+            background: linear-gradient(to top right, blue, magenta);
+            color: white;
+            border-radius: 50px;
+            border: none;
+        }
+        .threed-btn{
+            background-color: black;
+            box-shadow: 1px 1px 2px 2px black;
+            color: white;
+        }
+        button:hover{
+            transform: scale(1.1);
+        }
+
+        input,textarea{
+            width: 200px;
+            height: 20px;
+            padding: 10px;
+            border: 1px solid rgb(174, 158, 158);
+            border-radius: 5px;
+        }
+        input[type='password']{
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
+        select{
+            width: 50px;
+            height: 41px;
+            border-radius: 5px 0px 0px 5px;
+            border-right: none;
+        }
+        input[type=tel]{
+            width: 150px;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .card, .card-horizontal{
+            width: 100px;
+            height: 150px;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: 1px 1px 0px 2px black;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card-head{
+            width: 100%;
+            height: 50%;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-body{
+            padding: 5px;
+            font-size: 10px;
+            height: 50%;
+        }
+        .card-head .img{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: red;
+        }
+        .card-horizontal{
+            width: 150px;
+            height: 50px;
+            flex-direction: row;
+        }
+        .card-horizontal-head{
+            width: 50%;
+            height: 100%;
+            background-color: rebeccapurple;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-horizontal-body{
+            padding: 5px;
+            font-size: 10px;
+        }
+        .card-horizontal-head .img{
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        nav{
+            width: 500px;
+            height: 50px;
+            background-color: rgb(2, 2, 193);
+            padding: 0px 10px;
+        }
+        nav ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        nav ul li{
+            width: 100%;
+            height: 100%;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: medium;
+        }
+
+        .border-nav nav{
+            background-color: transparent;
+        }
+        .border-nav nav li{
+            border: 1px solid navy;
+            color: navy;
+        }
+        .button-nav nav{
+            background-color: transparent;
+        }
+        .button-nav nav li{
+            width: 110px;
+            height: 90%;
+            background-color: navy;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Color</h2>
+        <div class="bar">
+            <h3>Dark Blue</h3>
+            <ul>
+                <li style="--opacity : 10; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 9; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 8; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 7; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 6; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 5; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 4; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 3; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 2; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 1; background-color: rgba(0, 48, 143, calc(var(--opacity)*0.2));"></li>
+            </ul>
+        </div>
+        <div class="bar">
+            <h3>Blue</h3>
+            <ul>
+                <li style="--opacity :10; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 9; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 8; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 7; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 6; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 5; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 4; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 3; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 2; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+                <li style="--opacity : 1; background-color: rgba(0,0,225, calc(var(--opacity)*0.2));"></li>
+            </ul>
+        </div>
+        <div class="bar">
+            <h3>Aqua</h3>
+            <ul>
+                <li style="--opacity :10; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 9; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 8; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 7; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 6; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 5; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 4; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 3; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 2; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 1; background-color: rgba(0,225,225, calc(var(--opacity)*0.2))"></li>
+            </ul>
+        </div>
+        <div class="bar">
+            <h3>Red</h3>
+            <ul>
+                <li style="--opacity :10; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 9; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 8; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 7; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 6; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 5; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 4; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 3; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 2; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 1; background-color: rgba(225,0,0, calc(var(--opacity)*0.2))"></li>
+            </ul>
+        </div>
+        <div class="bar">
+            <h3>Aqua</h3>
+            <ul>
+                <li style="--opacity :10; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 9; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 8; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 7; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 6; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 5; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 4; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 3; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 2; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+                <li style="--opacity : 1; background-color: rgba(0,0,0, calc(var(--opacity)*0.2))"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <th colspan="6">Buttons</th>
+            </tr>
+            <tr>
+                <td>Create</td>
+                <td><button class="create-btn-border">Add</button></td>
+                <td><button class="create-btn-bgcolor">Add</button></td>
+                <td><button class="create-btn-boxshadow">Add</button></td>
+                <td><button class="create-btn-round">Add</button></td>
+                <td><button class="create-btn-icon" id="icon">+</button></td>
+            </tr>
+            <tr>
+                <td>Danger</td>
+                <td><button class="danger-btn-border">Delete</button></td>
+                <td><button class="danger-btn-bgcolor">Delete</button></td>
+                <td><button class="danger-btn-boxshadow">Delete</button></td>
+                <td><button class="danger-btn-round">Delete</button></td>
+                <td><button class="danger-btn-icon" id="icon">-</button></td>
+            </tr>
+            <tr>
+                <td>More</td>
+                <td><button class="more-btn-border">More</button></td>
+                <td><button class="more-btn-bgcolor">More</button></td>
+                <td><button class="more-btn-boxshadow">More</button></td>
+                <td><button class="more-btn-round">More</button></td>
+                <td><button class="more-btn-icon" id="icon">...</button></td>
+            </tr>
+            <tr>
+                <td>Other</td>
+                <td><button class="secondary-btn">Button</button></td>
+                <td><button class="text-btn">Read More</button></td>
+                <td><button class="dim-btn">Buttton</button></td>
+                <td><button class="gradient-btn">Button</button></td>
+                <td><button class="threed-btn" id="icon">+</button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Input</th>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Text-input"></td>
+                <td><input type="number" placeholder="Number-input"></td>
+                <td><input type="datetime-local"></td>
+            </tr>
+            <tr>
+                <td><input type="password" placeholder="Password-input"></td>
+                <td><input type="time" ></td>
+                <td><textarea>Text Area</textarea></td>
+            </tr>
+            <tr>
+                <td><select>
+                    <option value="">+91</option>
+                    <option value="">+44</option>
+                </select><input type="tel"></td>                
+                <td><input type="date" placeholder="Data-input"></td>
+                <td><input type="email" placeholder="Email-input"></td>
+            </tr>
+            <tr>
+                <td><input type="radio"></td>
+                <td><input type="range"></td>
+                <td><input type="checkbox"></td>
+            </tr>
+            
+        </table>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Cards</th>
+            </tr>
+            <tr>
+                <td><div class="card">
+                    <div class="card-head"></div>
+                    <div class="card-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, omnis!</div>
+                </div></td>
+                <td><div class="card">
+                    <div class="card-head" style="width: 95%; height: 40%;"></div>
+                    <div class="card-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, omnis!</div>
+                </div></td>
+                <td><div class="card">
+                    <div class="card-head" style="background: transparent;"><div class="img"></div></div>
+                    <div class="card-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis, omnis!</div>
+                </div></td>
+            </tr>
+            <tr>
+                <td><div class="card-horizontal">
+                    <div class="card-horizontal-head"></div>
+                    <div class="card-horizontal-body">Lorem, ipsum dolor sit amet.</div>
+                </div></td>
+                <td><div class="card-horizontal">
+                    <div class="card-horizontal-head" style="width: 45%; height: 90%;margin-left: 2px;"></div>
+                    <div class="card-horizontal-body">Lorem, ipsum dolor sit amet.</div>
+                </div></td>
+                <td><div class="card-horizontal">
+                    <div class="card-horizontal-head" style="background: transparent;"><div class="img"></div></div>
+                    <div class="card-horizontal-body">Lorem, ipsum dolor sit amet.</div>
+                </div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Tab Bars</th>
+            </tr>
+            <tr>
+                <td>
+                    <nav>
+                        <ul>
+                            <li>Home</li>
+                            <li style="background-color: navy;">About</li>
+                            <li>Products</li>
+                            <li>Contact</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+            <tr>
+                <td class="border-nav">
+                    <nav>
+                        <ul>
+                            <li>Home</li>
+                            <li>About</li>
+                            <li style="background-color: navy;color: white;">Products</li>
+                            <li>Contact</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+            <tr>
+                <td class="button-nav">
+                    <nav>
+                        <ul>
+                            <li style="border:1px solid navy;color: navy;background-color: transparent;">Home</li>
+                            <li>About</li>
+                            <li>Products</li>
+                            <li>Contact</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <nav>
+                        <ul>
+                            <li>Home</li>
+                            <li>About</li>
+                            <li>Products</li>
+                            <li style="height: 70%;background-color: #fff;border-radius: 50px;color: navy;">Contact</li>
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
