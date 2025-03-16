@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Website</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
+      background-color: #f4f4f4;
+    }
+    .dark-theme {
+      background-color: #333;
+      color: #fff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, #ff7e5f, #feb47b);
+      color: #fff;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .cart-icon, .order-icon {
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    .cart-icon:hover, .order-icon:hover {
+      opacity: 0.8;
+    }
+    .burger-icon {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: #fff;
+      border-radius: 10px;
+    }
+    .product-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .product-details {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+    .product-details.active {
+      display: block;
+    }
+    .dark-theme .product-details {
+      background-color: #444;
+      color: #fff;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+    .search-bar {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .search-bar input {
+      padding: 10px;
+      width: 300px;
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #333;
+    }
+    .profile-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .profile-details input, .profile-details select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .profile-details button {
+      padding: 10px;
+      background: #ff7e5f;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .profile-details button:hover {
+      background: #feb47b;
+    }
+    .cart-item, .wishlist-item, .order-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .cart-item img, .wishlist-item img, .order-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+    }
+    .remove-btn {
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background: #ff1a1a;
+    }
+    .payment-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      z-index: 1000;
+    }
+    .payment-modal.active {
+      display: block;
+    }
+    .payment-modal input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .payment-modal button {
+      padding: 10px;
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .payment-modal button:hover {
+      background: #45a049;
+    }
+    .category-products {
+      display: none;
+      margin-top: 20px;
+    }
+    .category-products.active {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .burger-icon {
+        display: block;
+      }
+      nav a {
+        display: none;
+      }
+      nav.active a {
+        display: block;
+        margin: 10px 0;
+      }
+      .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      #wishlist-items{
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="burger-icon" onclick="toggleNav()">☰</div>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#wishlist">Wishlist</a>
+      <a href="#profile">Profile</a>
+    </div>
+    <div>
+      <span class="cart-icon" onclick="toggleCart()">🛒</span>
+      <span class="order-icon" onclick="toggleOrders()">📦</span>
+      <span class="theme-toggle" onclick="toggleTheme()">🌙</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Home Section -->
+    <section id="home">
+      <h2>Trending Products</h2>
+      <div class="product-grid">
+        <div class="product-card" onclick="showProductDetails('Product 1', 99.99, 4.5, 'https://via.placeholder.com/150')">
+          <img src="p1.jpeg" alt="Product 1">
+          <h3>Product 1</h3>
+          <p>$99.99</p>
+        </div>
+        <!-- Add more products here -->
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories">
+      <h2>Categories</h2>
+      <div class="product-grid">
+        <div class="product-card" onclick="showCategoryProducts('Home Appliances')">
+          <img src="h1.jpeg" alt="Home Appliances">
+          <h3>Home Appliances</h3>
+        </div>
+        <div class="product-card" onclick="showCategoryProducts('Mobiles')">
+          <img src="ms1.jpeg" alt="Mobiles">
+          <h3>Mobiles</h3>
+        </div>
+        <div class="product-card" onclick="showCategoryProducts('Laptops')">
+            <img src="ls1.jpeg" alt="Laptops">
+            <h3>Laptops</h3>
+          </div>
+        <!-- Add more categories here -->
+      </div>
+      <!-- Category Products -->
+      <div class="category-products" id="category-products">
+        <h3 id="category-title"></h3>
+        <div class="product-grid" id="category-products-grid">
+          <!-- Products will be dynamically added here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Wishlist Section -->
+    <section id="wishlist">
+      <h2>Wishlist</h2>
+      <div class="product-grid" id="wishlist-items">
+        <!-- Wishlist items will be dynamically added here -->
+      </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile">
+      <h2>Profile</h2>
+      <div class="profile-section">
+        <div class="profile-pic">👤</div>
+        <div class="profile-details">
+          <input type="text" placeholder="Full Name">
+          <input type="email" placeholder="Email">
+          <select>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <input type="text" placeholder="Payment Method">
+          <button onclick="saveProfile()">Save Profile</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Details Popup -->
+    <div class="product-details" id="product-details">
+      <span class="close-btn" onclick="closeProductDetails()">×</span>
+      <img id="product-details-image" src="" alt="Product Image" style="width: 100%; border-radius: 10px;">
+      <h2 id="product-name"></h2>
+      <p id="product-price"></p>
+      <p id="product-rating"></p>
+      <button onclick="addToCart()">Add to Cart</button>
+      <button onclick="addToWishlist()">Add to Wishlist</button>
+    </div>
+
+    <!-- Cart Popup -->
+    <div class="product-details" id="cart">
+      <span class="close-btn" onclick="toggleCart()">×</span>
+      <h2>Cart</h2>
+      <div id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+      </div>
+      <button onclick="openPaymentModal()">Proceed to Payment</button>
+    </div>
+
+    <!-- Orders Popup -->
+    <div class="product-details" id="orders">
+      <span class="close-btn" onclick="toggleOrders()">×</span>
+      <h2>Orders</h2>
+      <div id="order-items">
+        <!-- Order items will be dynamically added here -->
+      </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="payment-modal">
+      <span class="close-btn" onclick="closePaymentModal()">×</span>
+      <h2>Payment</h2>
+      <input type="text" placeholder="Card Number">
+      <input type="text" placeholder="Expiry Date">
+      <input type="text" placeholder="CVV">
+      <button onclick="completePayment()">Pay Now</button>
+    </div>
+  </div>
+
+  <script>
+    // Temporary data
+    let cart = [];
+    let wishlist = [];
+    let orders = [];
+
+    // Sample category products
+    const categoryProducts = {
+      "Home Appliances": [
+        { name: "Washing Machine", price: 499.99, rating: 4.5, image: "w1.jpeg" },
+        { name: "Refrigerator", price: 799.99, rating: 4.7, image: "f1.jpeg" },
+        { name: "Microwave", price: 199.99, rating: 4.3, image: "mi1.jpeg" },
+        { name: "LED TV", price: 599.99, rating: 4.5, image: "t1.jpeg" },
+        
+      ],
+      "Mobiles": [
+        { name: "Smartphone X", price: 699.99, rating: 4.8, image: "p2.jpeg" },
+        { name: "Smartphone Y", price: 599.99, rating: 4.6, image: "p3.jpeg" },
+        { name: "Smartphone Z", price: 499.99, rating: 4.4, image: "p4.jpeg" },
+      ],
+      "Laptops":[
+        { name: "Laptop X", price: 899.99, rating: 4.8, image: "l2.jpeg" },
+        { name: "Laptop Y", price: 1099.99, rating: 4.3, image: "l1.jpeg" },
+        { name: "Laptop Z", price: 1299.99, rating: 4.1, image: "l2.jpeg" },
+      ],
+    };
+
+    // Toggle product details
+    function showProductDetails(name, price, rating, image) {
+      document.getElementById('product-name').innerText = name;
+      document.getElementById('product-price').innerText = `$${price}`;
+      document.getElementById('product-rating').innerText = `Rating: ${rating}`;
+      document.getElementById('product-details-image').src = image;
+      document.getElementById('product-details').classList.add('active');
+    }
+
+    function closeProductDetails() {
+      document.getElementById('product-details').classList.remove('active');
+    }
+
+    // Add to cart
+    function addToCart() {
+      const product = {
+        name: document.getElementById('product-name').innerText,
+        price: document.getElementById('product-price').innerText,
+        image: document.getElementById('product-details-image').src,
+      };
+      cart.push(product);
+      updateCart();
+      closeProductDetails();
+    }
+
+    // Add to wishlist
+    function addToWishlist() {
+      const product = {
+        name: document.getElementById('product-name').innerText,
+        price: document.getElementById('product-price').innerText,
+        image: document.getElementById('product-details-image').src,
+      };
+      wishlist.push(product);
+      updateWishlist();
+      closeProductDetails();
+    }
+
+    // Update cart UI
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}">
+          <p>${item.name} - ${item.price}</p>
+          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    // Update wishlist UI
+    function updateWishlist() {
+      const wishlistItems = document.getElementById('wishlist-items');
+      wishlistItems.innerHTML = wishlist.map((item, index) => `
+        <div class="wishlist-item">
+          <img src="${item.image}" alt="${item.name}">
+          <p>${item.name} - ${item.price}</p>
+          <button class="remove-btn" onclick="removeFromWishlist(${index})">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    // Remove from cart
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    // Remove from wishlist
+    function removeFromWishlist(index) {
+      wishlist.splice(index, 1);
+      updateWishlist();
+    }
+
+    // Toggle cart popup
+    function toggleCart() {
+      const cartPopup = document.getElementById('cart');
+      cartPopup.classList.toggle('active');
+    }
+
+    // Toggle orders popup
+    function toggleOrders() {
+      const ordersPopup = document.getElementById('orders');
+      ordersPopup.classList.toggle('active');
+    }
+
+    // Toggle theme
+    function toggleTheme() {
+      document.body.classList.toggle('dark-theme');
+    }
+
+    // Toggle nav for mobile
+    function toggleNav() {
+      const nav = document.querySelector('nav');
+      nav.classList.toggle('active');
+    }
+
+    // Save profile (dummy function)
+    function saveProfile() {
+      alert('Profile saved!');
+    }
+
+    // Open payment modal
+    function openPaymentModal() {
+      document.getElementById('payment-modal').classList.add('active');
+    }
+
+    // Close payment modal
+    function closePaymentModal() {
+      document.getElementById('payment-modal').classList.remove('active');
+    }
+
+    // Complete payment
+    function completePayment() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      orders.push(...cart);
+      cart = [];
+      updateCart();
+      closePaymentModal();
+      alert('Payment successful!');
+    }
+
+    // Show category products
+    function showCategoryProducts(category) {
+      const products = categoryProducts[category];
+      const categoryProductsGrid = document.getElementById('category-products-grid');
+      const categoryTitle = document.getElementById('category-title');
+      categoryTitle.innerText = category;
+      categoryProductsGrid.innerHTML = products.map(product => `
+        <div class="product-card" onclick="showProductDetails('${product.name}', ${product.price}, ${product.rating}, '${product.image}')">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>$${product.price}</p>
+        </div>
+      `).join('');
+      document.getElementById('category-products').classList.add('active');
+    }
+  </script>
+</body>
+</html>
